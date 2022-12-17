@@ -1,0 +1,72 @@
+const ruLocales = {
+  translation: {
+    logOut: 'Выход',
+    channels: 'Каналы',
+    messageForm: 'Введите сообщение...',
+    messagesQuantity: {
+      counter: {
+        count_one: '{{count}} сообщение',
+        count_few: '{{count}} сообщения',
+        count_many: '{{count}} сообщений',
+      },
+    },
+    addChannelToast: 'Канал создан',
+    renameChannelToast: 'Канал переименован',
+    removeChannelToast: 'Канал удалён',
+    errorNetwork: 'Ошибка соединения',
+    loginPage: {
+      signUp: 'Регистрация',
+      enter: 'Войти',
+      notAccount: 'Нет аккаунта?',
+      username: 'Ваш ник',
+      password: 'Пароль',
+      noValid: 'Неверные имя пользователя или пароль',
+      required: 'Обязательное поле',
+    },
+    signUpPage: {
+      username: 'Имя пользователя',
+      password: 'Пароль',
+      confirmPassword: 'Подтвердите пароль',
+      signUp: 'Зарегистрироваться',
+      title: 'Регистрация',
+      usernameLenght: 'От 3 до 20 символов',
+      minPasswordLenght: 'Не менее 6 символов',
+      passwordConErr: 'Пароли должны совпадать',
+      required: 'Обязательное поле',
+      authFailed: 'Такой пользователь уже существует',
+      haveAccount: 'Уже есть аккаунт?',
+      login: 'Войти',
+    },
+    modal: {
+      addChannel: 'Добавить канал',
+      name: 'Имя канала',
+      cancelButton: 'Отменить',
+      addButton: 'Отправить',
+      removeChannel: 'Удалить канал',
+      questionRemove: 'Уверены?',
+      removeButton: 'Удалить',
+      renameChannel: 'Переименовать канал',
+      rename: 'Переименовать',
+      sendButton: 'Отправить',
+      duplicate: 'Должно быть уникальным',
+      nameLenght: 'От 3 до 20 символов',
+      channelManagement: 'Управление каналом',
+      required: 'Обязательное поле',
+    },
+    notFound: {
+      message: 'Страница не найдена',
+      youCan: 'Но вы можете перейти ',
+      mainPage: 'на главную страницу',
+    },
+    toast: {
+      createChannel: 'Канал создан',
+      removeChannel: 'Канал удалён',
+      renamedChannel: 'Канал переименован',
+    },
+    label: {
+      newMessage: 'Новое сообщение',
+    },
+  },
+};
+
+export default ruLocales;
