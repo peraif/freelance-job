@@ -16,7 +16,7 @@ export const ApiProvider = ({ children, value }) => {
       }
     }),
     deleteChannel: (currentChannel) => socket.emit('removeChannel', currentChannel),
-    renameChannel: ({ id, name: renameChannel }) => socket.emit('renameChannel', { id, name: renameChannel }),
+    fnRenameChannel: ({ id, name: renameChannel }) => socket.emit('renameChannel', { id, name: renameChannel }),
   }), [socket]);
 
   return (
