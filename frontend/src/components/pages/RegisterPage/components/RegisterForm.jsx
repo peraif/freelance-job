@@ -14,9 +14,9 @@ const RegisterFrom = () => {
   const { t } = useTranslation();
   const [authFailed, setAuthFailed] = useState(false);
   const SignupSchema = yup.object().shape({
-    username: yup.string().required(t('signUpPage.required')).min(3, t('signUpPage.usernameLenght')).max(20, t('signUpPage.usernameLenght')),
-    password: yup.string().required(t('signUpPage.required')).min(6, t('signUpPage.minPasswordLenght')),
-    confirmPassword: yup.string().oneOf([yup.ref('password'), null], t('signUpPage.passwordConErr')),
+    username: yup.string().required('signUpPage.required').min(3, 'signUpPage.usernameLenght').max(20, 'signUpPage.usernameLenght'),
+    password: yup.string().required('signUpPage.required').min(6, 'signUpPage.minPasswordLenght'),
+    confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'signUpPage.passwordConErr'),
   });
   const navigate = useNavigate();
   const authUser = useAuth();
@@ -72,7 +72,7 @@ const RegisterFrom = () => {
             />
             <Form.Label htmlFor="username">{t('signUpPage.username')}</Form.Label>
             <Form.Control.Feedback type="invalid" tooltip placement="right">
-              {errors.username}
+              {(t(errors.username))}
             </Form.Control.Feedback>
 
           </Form.Group>
@@ -91,7 +91,7 @@ const RegisterFrom = () => {
             />
             <Form.Label htmlFor="password">{t('signUpPage.password')}</Form.Label>
             <Form.Control.Feedback type="invalid" tooltip placement="right">
-              {errors.password}
+              {(t(errors.password))}
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="form-floating mb-4">
@@ -108,7 +108,7 @@ const RegisterFrom = () => {
             />
             <Form.Label htmlFor="confirmPassword">{t('signUpPage.confirmPassword')}</Form.Label>
             <Form.Control.Feedback type="invalid" tooltip placement="right">
-              {authFailed ? t('signUpPage.authFailed') : errors.confirmPassword}
+              {authFailed ? t('signUpPage.authFailed') : (t(errors.confirmPassword))}
             </Form.Control.Feedback>
           </Form.Group>
           <Button type="submit" className="w-100 mb-3">

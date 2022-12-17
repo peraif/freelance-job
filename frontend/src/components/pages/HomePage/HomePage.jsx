@@ -28,7 +28,7 @@ const HomePage = () => {
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
-        {dataChannels.loading ? <div>Loading...</div> : <Channels channels={dataChannels} currectChannelID={dataCurrentID} />}
+        <Channels channels={dataChannels} currectChannelID={dataCurrentID} />
         <Message message={currentMessage} currectChannelID={dataCurrentID} correctChatName={currentChat[0]?.name} />
       </div>
     </div>

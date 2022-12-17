@@ -20,6 +20,13 @@ const rollbarConfig = {
   },
 };
 
+const socketSubscriptions = [
+  { key: 'newMessage', actionCreator: addMessage },
+  { key: 'newChannel', actionCreator: addChannel },
+  { key: 'removeChannel', actionCreator: removeChannel },
+  { key: 'renameChannel', actionCreator: renameChannel },
+];
+
 const App = async (socket) => {
   const i18n = i18next.createInstance();
   await i18n
@@ -32,16 +39,15 @@ const App = async (socket) => {
       },
     });
 
-  const socketOn = (key, actionCreator) => {
-    socket.on(key, (id) => {
-      store.dispatch(actionCreator(id));
+  const socketOn = (arr) => {
+    arr.forEach((item) => {
+      socket.on(item.key, (id) => {
+        store.dispatch(item.actionCreator(id));
+      });
     });
   };
 
-  socketOn('newMessage', addMessage);
-  socketOn('newChannel', addChannel);
-  socketOn('removeChannel', removeChannel);
-  socketOn('renameChannel', renameChannel);
+  socketOn(socketSubscriptions);
 
   filter.add(filter.getDictionary('en'));
   filter.add(filter.getDictionary('ru'));

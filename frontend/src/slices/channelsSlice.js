@@ -22,9 +22,10 @@ export const getData = createAsyncThunk('channels/getData', async (payload, { re
 
 const channelsAdapter = createEntityAdapter();
 const initialState = {
-  ...channelsAdapter.getInitialState(),
+  ...channelsAdapter.getInitialState({
+    status: 'idle',
+  }),
   id: 1,
-  loading: false,
 };
 
 const channelsSlice = createSlice({
@@ -43,8 +44,11 @@ const channelsSlice = createSlice({
     builder
       .addCase(getData.fulfilled, (state, { payload }) => {
         const { channels } = payload;
-        console.log(getData);
         channelsAdapter.setAll(state, channels);
+        state.status = 'idle';
+      })
+      .addCase(getData.pending, (state) => {
+        state.status = 'loading';
       });
   },
 });
@@ -55,6 +59,7 @@ export const namesChannelsSelector = (state) => selectors.selectAll(state).map((
 export const getActiveChannel = (state) => state.channels.id;
 export const currentChatSelector = (state) => selectors.selectAll(state)
   .filter((channel) => channel.id === state.channels.id);
+export const channelsLoading = (state) => state.channels.status;
 
 export const {
   addChannel, removeChannel, renameChannel, changeChannelID,

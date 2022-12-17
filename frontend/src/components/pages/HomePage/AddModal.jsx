@@ -27,10 +27,10 @@ const AddModal = () => {
   const channelValidate = yup.object().shape({
     nameChannel: yup
       .string()
-      .required(t('modal.required'))
-      .min(3, t('modal.nameLenght'))
-      .max(20, t('modal.nameLenght'))
-      .notOneOf(namesChannels, t('modal.duplicate')),
+      .required('modal.required')
+      .min(3, 'modal.nameLenght')
+      .max(20, 'modal.nameLenght')
+      .notOneOf(namesChannels, 'modal.duplicate'),
   });
   return (
     <Formik
@@ -79,7 +79,7 @@ const AddModal = () => {
                 />
                 <Form.Label className="visually-hidden" htmlFor="nameChannel">{t('modal.name')}</Form.Label>
                 <Form.Control.Feedback type="invalid" tooltip placement="right">
-                  {errors.nameChannel ? errors.nameChannel : null}
+                  {errors.nameChannel ? (t(errors.nameChannel)) : null}
                 </Form.Control.Feedback>
                 <div className="invalid-fb">{t(validationError)}</div>
               </Form.Group>

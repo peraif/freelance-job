@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import { Formik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,7 @@ import filter from 'leo-profanity';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../../../contexts/AuthContext';
 import { useApi } from '../../../../contexts/SocketContext';
-import { currentChatSelector } from '../../../../slices/channelsSlice';
+import { channelsLoading, currentChatSelector } from '../../../../slices/channelsSlice';
 
 const Messages = ({ message, currectChannelID, correctChatName }) => {
   const { t } = useTranslation();
@@ -17,6 +17,13 @@ const Messages = ({ message, currectChannelID, correctChatName }) => {
   const messagesEndRef = useRef(null);
   const currentChat = useSelector(currentChatSelector);
   const ref = useRef(null);
+  const loadingStatus = useSelector(channelsLoading);
+  const chatName = useMemo(() => {
+    if (loadingStatus === 'loading') {
+      return <>Loading...</>;
+    }
+    return `# ${correctChatName}`;
+  }, [loadingStatus]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -73,7 +80,7 @@ const Messages = ({ message, currectChannelID, correctChatName }) => {
           <div className="d-flex flex-column h-100">
             <div className="bg-light mb-4 p-3 shadow-sm small">
               <p className="m-0">
-                <b>{`# ${correctChatName}`}</b>
+                <b>{chatName}</b>
               </p>
               <span className="text-muted">{t('messagesQuantity.counter.count', { count: message.length })}</span>
             </div>

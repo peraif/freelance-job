@@ -31,10 +31,10 @@ const RenameModal = () => {
   const validateRename = yup.object().shape({
     renameChannel: yup
       .string()
-      .required(t('modal.required'))
-      .min(3, t('modal.nameLenght'))
-      .max(20, t('modal.nameLenght'))
-      .notOneOf(namesChannels, t('modal.duplicate')),
+      .required('modal.required')
+      .min(3, 'modal.nameLenght')
+      .max(20, 'modal.nameLenght')
+      .notOneOf(namesChannels, 'modal.duplicate'),
   });
   return (
     <Formik
@@ -85,7 +85,7 @@ const RenameModal = () => {
                     className="mb-2"
                   />
                   <Form.Control.Feedback type="invalid" tooltip placement="right">
-                    {errors.renameChannel ? errors.renameChannel : null}
+                    {errors.renameChannel ? (t(errors.renameChannel)) : null}
                   </Form.Control.Feedback>
                   <div className="invalid-fb">{t(validationError)}</div>
                 </FloatingLabel>
