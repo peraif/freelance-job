@@ -1,7 +1,7 @@
 import { React } from 'react';
 import Image from 'react-bootstrap/Image';
 import { useTranslation } from 'react-i18next';
-import imageNotFound from '../assets/404-page.svg';
+import imageNotFound from '../../../assets/404-page.svg';
 
 const NotFoundPage = () => {
   const { t } = useTranslation();
@@ -11,7 +11,7 @@ const NotFoundPage = () => {
       <h1 className="h4 text-muted">{t('notFound.message')}</h1>
       <p className="text-muted">
         {t('notFound.youCan')}
-        <a href="/">{t('notFound.mainPage')}</a>
+        <a href="/frontend/src/routes">{t('notFound.mainPage')}</a>
       </p>
     </div>
   );

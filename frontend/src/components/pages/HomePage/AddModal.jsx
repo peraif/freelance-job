@@ -8,10 +8,10 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { Form, Button, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../slices/modalSlice';
-import { selectors } from '../../slices/channelsSlice';
-import { useSocket } from '../../contexts/SocketContext';
-import { useToastify } from '../../contexts/ToastifyContext';
+import { closeModal } from '../../../slices/modalSlice';
+import { namesChannelsSelector } from '../../../slices/channelsSlice';
+import { useApi } from '../../../contexts/SocketContext';
+import { useToastify } from '../../../contexts/ToastifyContext';
 
 const AddModal = () => {
   const { successToast } = useToastify();
@@ -19,9 +19,8 @@ const AddModal = () => {
   const dispatch = useDispatch();
   const inputRef = useRef();
   const [validationError, setValidationError] = useState('');
-  const soc = useSocket();
-  const allChannels = useSelector((state) => selectors.selectAll(state));
-  const namesChannels = allChannels.map((it) => it.name);
+  const soc = useApi();
+  const namesChannels = useSelector(namesChannelsSelector);
   useEffect(() => {
     inputRef.current.focus();
   }, []);

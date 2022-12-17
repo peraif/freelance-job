@@ -7,8 +7,8 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import routes from '../../routes/routes';
-import { useAuth } from '../../contexts/AuthContext.jsx';
+import routes from '../../../../routes/routes';
+import { useAuth } from '../../../../contexts/AuthContext.jsx';
 
 const RegisterFrom = () => {
   const { t } = useTranslation();

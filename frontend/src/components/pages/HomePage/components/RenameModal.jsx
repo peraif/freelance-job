@@ -8,17 +8,17 @@ import {
   FloatingLabel, Form, Button, Modal,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../slices/modalSlice';
-import { selectors } from '../../slices/channelsSlice';
-import { useSocket } from '../../contexts/SocketContext';
-import { useToastify } from '../../contexts/ToastifyContext';
+import { closeModal } from '../../../../slices/modalSlice';
+import { selectors } from '../../../../slices/channelsSlice';
+import { useApi } from '../../../../contexts/SocketContext';
+import { useToastify } from '../../../../contexts/ToastifyContext';
 
 const RenameModal = () => {
   const { successToast } = useToastify();
   const { t } = useTranslation();
   const inputRef = useRef();
   const dispatch = useDispatch();
-  const soc = useSocket();
+  const soc = useApi();
   const { item } = useSelector((store) => store.modal);
   const allChannels = useSelector((state) => selectors.selectAll(state));
   const namesChannels = allChannels.map((it) => it.name);

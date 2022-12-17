@@ -3,16 +3,16 @@ import { React } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../slices/modalSlice';
-import { selectors, changeChannelID } from '../../slices/channelsSlice';
-import { useSocket } from '../../contexts/SocketContext';
-import { useToastify } from '../../contexts/ToastifyContext';
+import { closeModal } from '../../../../slices/modalSlice';
+import { selectors, changeChannelID } from '../../../../slices/channelsSlice';
+import { useApi } from '../../../../contexts/SocketContext';
+import { useToastify } from '../../../../contexts/ToastifyContext';
 
 const RemoveModal = ({ currectChannelID }) => {
   const { successToast } = useToastify();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const soc = useSocket();
+  const soc = useApi();
   const { item } = useSelector((store) => store.modal);
 
   const currentChannel = useSelector((state) => selectors.selectAll(state).find((it) => it.id === item));

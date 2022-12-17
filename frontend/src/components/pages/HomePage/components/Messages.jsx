@@ -1,22 +1,30 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { React, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Formik } from 'formik';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import filter from 'leo-profanity';
 import { Button } from 'react-bootstrap';
-import { useAuth } from '../../contexts/AuthContext';
-import { useSocket } from '../../contexts/SocketContext';
+import { useAuth } from '../../../../contexts/AuthContext';
+import { useApi } from '../../../../contexts/SocketContext';
+import { currentChatSelector } from '../../../../slices/channelsSlice';
 
 const Messages = ({ message, currectChannelID, correctChatName }) => {
   const { t } = useTranslation();
   const auth = useAuth();
-  const soc = useSocket();
+  const soc = useApi();
   const messagesEndRef = useRef(null);
+  const currentChat = useSelector(currentChatSelector);
+  const ref = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    ref.current.focus();
+  }, [currentChat]);
 
   useEffect(() => {
     scrollToBottom();
@@ -84,6 +92,7 @@ const Messages = ({ message, currectChannelID, correctChatName }) => {
               <form className="py-1 border rounded-2" onSubmit={handleSubmit}>
                 <div className="input-group has-validation">
                   <input
+                    ref={ref}
                     className="border-0 p-0 ps-2 form-control"
                     type="text"
                     name="text"

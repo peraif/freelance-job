@@ -1,12 +1,12 @@
-import { React } from 'react';
+import React from 'react';
 import {
   BrowserRouter, Routes, Route, Navigate, useLocation, Outlet,
 } from 'react-router-dom';
-import LoginPage from './LoginPage/LoginPage';
-import HomePage from './HomePage/HomePage';
-import Nav from './Nav.jsx';
-import RegisterPage from './RegisterPage/RegisterPage';
-import NotFoundPage from './NotFoundPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import HomePage from './pages/HomePage/HomePage';
+import Nav from './common/Nav/Nav.jsx';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
 import { ToastifyProvider } from '../contexts/ToastifyContext';
 

@@ -7,9 +7,9 @@ import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import routes from '../../routes/routes';
-import { useAuth } from '../../contexts/AuthContext.jsx';
-import { useToastify } from '../../contexts/ToastifyContext';
+import routes from '../../../../routes/routes';
+import { useAuth } from '../../../../contexts/AuthContext.jsx';
+import { useToastify } from '../../../../contexts/ToastifyContext';
 
 const LoginForm = () => {
   const [authFailed, setAuthFailed] = useState(false);

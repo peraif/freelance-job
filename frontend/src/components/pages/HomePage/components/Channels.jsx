@@ -5,11 +5,11 @@ import {
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { openModal } from '../../slices/modalSlice';
-import { changeChannelID } from '../../slices/channelsSlice';
+import { openModal } from '../../../../slices/modalSlice';
+import { changeChannelID } from '../../../../slices/channelsSlice';
 import RemoveModal from './RemoveModal';
 import RenameModal from './RenameModal';
-import AddModal from './AddModal';
+import AddModal from '../AddModal';
 
 const Channels = ({ channels, currectChannelID }) => {
   const { t } = useTranslation();
