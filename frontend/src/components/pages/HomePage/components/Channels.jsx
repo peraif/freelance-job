@@ -35,7 +35,7 @@ const Channels = ({ channels, currectChannelID }) => {
         </Button>
       </div>
       <ul className="nav flex-column nav-pills nav-fill px-2">
-        {loadingStatus === 'loading' ? <div>Loading...</div> : channels.map((item) => (
+        {loadingStatus === 'loading' ? <div>{t('loadingData')}</div> : channels.map((item) => (
           <li key={item.id} className="nav-item w-100">
             <ButtonGroup className="d-flex dropdown btn-group channelsBtn">
               <Button

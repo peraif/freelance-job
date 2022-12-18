@@ -3,6 +3,7 @@ const ruLocales = {
     logOut: 'Выход',
     channels: 'Каналы',
     messageForm: 'Введите сообщение...',
+    loadingData: 'Загрузка данных...',
     messagesQuantity: {
       counter: {
         count_one: '{{count}} сообщение',

@@ -20,13 +20,6 @@ const rollbarConfig = {
   },
 };
 
-const socketSubscriptions = [
-  { key: 'newMessage', actionCreator: addMessage },
-  { key: 'newChannel', actionCreator: addChannel },
-  { key: 'removeChannel', actionCreator: removeChannel },
-  { key: 'renameChannel', actionCreator: renameChannel },
-];
-
 const App = async (socket) => {
   const i18n = i18next.createInstance();
   await i18n
@@ -46,6 +39,13 @@ const App = async (socket) => {
       });
     });
   };
+
+  const socketSubscriptions = [
+    { key: 'newMessage', actionCreator: addMessage },
+    { key: 'newChannel', actionCreator: addChannel },
+    { key: 'removeChannel', actionCreator: removeChannel },
+    { key: 'renameChannel', actionCreator: renameChannel },
+  ];
 
   socketOn(socketSubscriptions);
 

@@ -20,7 +20,7 @@ const Messages = ({ message, currectChannelID, correctChatName }) => {
   const loadingStatus = useSelector(channelsLoading);
   const chatName = useMemo(() => {
     if (loadingStatus === 'loading') {
-      return <>Loading...</>;
+      return <>{t('loadingData')}</>;
     }
     return `# ${correctChatName}`;
   }, [loadingStatus]);
