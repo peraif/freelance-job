@@ -16,8 +16,8 @@ const LoginForm = () => {
   const { t } = useTranslation();
   const { errorToast } = useToastify();
   const SignupSchema = yup.object().shape({
-    username: yup.string().required('loginPage.required'),
-    password: yup.string().required('loginPage.required'),
+    username: yup.string().required(t('loginPage.required')),
+    password: yup.string().required(t('loginPage.required')),
   });
   const navigate = useNavigate();
   const authUser = useAuth();
