@@ -10,7 +10,7 @@ const Nav = () => {
   return (
     <Navbar className="shadow-sm navbar navbar-light">
       <Container className="container">
-        <Link className="navbar-brand" to="/signup">Hexlet Chat</Link>
+        <Link className="navbar-brand" to="/login">Hexlet Chat</Link>
         {auth.loggedIn ? <Button onClick={() => auth.logOut()} className="btn-primary">{t('logOut')}</Button> : null}
       </Container>
     </Navbar>
