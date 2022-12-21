@@ -31,7 +31,7 @@ const HomePage = () => {
     if (channelsError && channelsError === 401) {
       logOut();
     }
-  }, [channelsError]);
+  }, [channelsError, logOut]);
   // debugger;
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
