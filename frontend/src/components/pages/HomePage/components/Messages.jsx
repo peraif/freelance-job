@@ -60,7 +60,7 @@ const Messages = ({ messages, currentChannelID, currentChatName }) => {
           dispatch(getData(getAuthToken()));
           resetForm();
         } catch (err) {
-          console.log(err.message);
+
         }
       }}
     >

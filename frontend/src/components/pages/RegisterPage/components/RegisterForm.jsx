@@ -40,7 +40,6 @@ const RegisterFrom = () => {
         } catch (err) {
           if (err.response.status === 409) {
             setAuthFailed(true);
-            console.log(err);
           }
           throw err;
         }

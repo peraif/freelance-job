@@ -40,7 +40,6 @@ const LoginForm = () => {
         } catch (err) {
           if (err.response.status === 401) {
             setAuthFailed(true);
-            console.log('ошибка 401');
           } else if (err.message === 'Network Error') {
             errorToast(t('errorNetwork'));
           }
