@@ -6,7 +6,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { openModal } from '../../../../slices/modalSlice';
-import { changeChannelID, channelsLoading } from '../../../../slices/channelsSlice';
+import { changeCurrentChannelID, channelsLoading } from '../../../../slices/channelsSlice';
 import RemoveModal from './RemoveModal';
 import RenameModal from './RenameModal';
 import AddModal from '../AddModal';
@@ -20,7 +20,7 @@ const Channels = ({ channels, currectChannelID }) => {
   const activeClassButton = 'w-100 rounded-0 text-start btn text-truncate btn-secondary shadow-none';
   const classBtnGroup = 'flex-grow-0 dropdown-toggle dropdown-toggle-split btn noborder-btn btn-light';
   const changeCurrentID = (id) => {
-    dispatch(changeChannelID(id));
+    dispatch(changeCurrentChannelID(id));
   };
   return (
     <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">

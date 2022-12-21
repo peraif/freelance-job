@@ -3,33 +3,41 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Channels from './components/Channels';
-import Message from './components/Messages';
-import { getMessage } from '../../../slices/messageSlice';
+import Messages from './components/Messages';
 import {
-  getData, getChannels, getActiveChannel, currentChatSelector,
+  getData,
+  getChannels,
+  getActiveChannel,
+  currentChatSelector,
+  currentMessagesSelector,
+  channelsErrorSelector,
 } from '../../../slices/channelsSlice';
 import { useAuth } from '../../../contexts/AuthContext';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const { getAuthToken } = useAuth();
+  const { getAuthToken, logOut } = useAuth();
   const dataChannels = useSelector(getChannels);
-  const dataMessages = useSelector(getMessage);
-  const dataCurrentID = useSelector(getActiveChannel);
+  const currentChannelID = useSelector(getActiveChannel);
   const currentChat = useSelector(currentChatSelector);
-  const currentMessage = dataMessages.filter((item) => item.channelId === dataCurrentID);
+  const currentMessages = useSelector(currentMessagesSelector);
+  const channelsError = useSelector(channelsErrorSelector);
 
   useEffect(() => {
     dispatch(getData(getAuthToken()));
   }, [dispatch, getAuthToken]);
 
-  // eslint-disable-next-line no-debugger
+  useEffect(() => {
+    if (channelsError && channelsError === 401) {
+      logOut();
+    }
+  }, [channelsError]);
   // debugger;
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
-        <Channels channels={dataChannels} currectChannelID={dataCurrentID} />
-        <Message message={currentMessage} currectChannelID={dataCurrentID} correctChatName={currentChat[0]?.name} />
+        <Channels channels={dataChannels} currectChannelID={currentChannelID} />
+        <Messages messages={currentMessages} currentChannelID={currentChannelID} currentChatName={currentChat[0]?.name} />
       </div>
     </div>
   );

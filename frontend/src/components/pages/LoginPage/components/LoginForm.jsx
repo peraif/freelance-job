@@ -36,7 +36,6 @@ const LoginForm = () => {
           const res = await axios.post(routes.loginPath(), values);
           authUser.logIn(res.data);
           setAuthFailed(false);
-          console.log(res.data);
           navigate('/');
         } catch (err) {
           if (err.response.status === 401) {

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import store from '../slices/store';
-import { changeChannelID } from '../slices/channelsSlice';
+import { changeCurrentChannelID } from '../slices/channelsSlice';
 
 export const ApiContext = createContext({});
 
@@ -12,7 +12,7 @@ export const ApiProvider = ({ children, value }) => {
     sendNewMessage: (message) => socket.emit('newMessage', message),
     addNewChannel: (newChannel) => socket.emit('newChannel', newChannel, (res) => {
       if (res.status === 'ok') {
-        store.dispatch(changeChannelID((res.data.id)));
+        store.dispatch(changeCurrentChannelID((res.data.id)));
       }
     }),
     deleteChannel: (currentChannel) => socket.emit('removeChannel', currentChannel),

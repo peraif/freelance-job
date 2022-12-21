@@ -1,16 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useRef, useEffect } from 'react';
 import { Formik } from 'formik';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import filter from 'leo-profanity';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../../../contexts/AuthContext';
 import { useApi } from '../../../../contexts/SocketContext';
-import { channelsLoading, currentChatSelector } from '../../../../slices/channelsSlice';
+import { channelsLoading, currentChatSelector, getData } from '../../../../slices/channelsSlice';
 
-const Messages = ({ message, currectChannelID, correctChatName }) => {
+const Messages = ({ messages, currentChannelID, currentChatName }) => {
   const { t } = useTranslation();
   const auth = useAuth();
   const soc = useApi();
@@ -18,6 +18,8 @@ const Messages = ({ message, currectChannelID, correctChatName }) => {
   const currentChat = useSelector(currentChatSelector);
   const ref = useRef(null);
   const loadingStatus = useSelector(channelsLoading);
+  const { getAuthToken } = useAuth();
+  const dispatch = useDispatch();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -29,7 +31,7 @@ const Messages = ({ message, currectChannelID, correctChatName }) => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [message]);
+  }, [messages]);
 
   useEffect(() => {
     scrollToBottom();
@@ -50,11 +52,12 @@ const Messages = ({ message, currectChannelID, correctChatName }) => {
         try {
           const messageText = filter.clean(values.text);
           const messageNew = {
-            channelId: currectChannelID,
+            channelId: currentChannelID,
             username: auth.getUserName(),
             text: messageText,
           };
           soc.sendNewMessage(messageNew);
+          dispatch(getData(getAuthToken()));
           resetForm();
         } catch (err) {
           console.log(err.message);
@@ -74,12 +77,12 @@ const Messages = ({ message, currectChannelID, correctChatName }) => {
           <div className="d-flex flex-column h-100">
             <div className="bg-light mb-4 p-3 shadow-sm small">
               <p className="m-0">
-                <b>{loadingStatus === 'loading' ? `${t('loadingData')}` : `# ${correctChatName}`}</b>
+                <b>{loadingStatus === 'loading' ? `${t('loadingData')}` : `# ${currentChatName}`}</b>
               </p>
-              <span className="text-muted">{t('messagesQuantity.counter.count', { count: message.length })}</span>
+              <span className="text-muted">{t('messagesQuantity.counter.count', { count: messages.length })}</span>
             </div>
             <div id="messages-box" className="chat-messages overflow-auto px-5 ">
-              {message?.map((item) => (
+              {messages?.map((item) => (
                 <div key={item.id} className="text-break mb-2">
                   <b>{item.username}</b>
                   :

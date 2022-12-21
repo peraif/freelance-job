@@ -4,7 +4,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../../slices/modalSlice';
-import { selectors, changeChannelID } from '../../../../slices/channelsSlice';
+import { selectors, changeCurrentChannelID } from '../../../../slices/channelsSlice';
 import { useApi } from '../../../../contexts/SocketContext';
 import { useToastify } from '../../../../contexts/ToastifyContext';
 
@@ -23,7 +23,7 @@ const RemoveModal = ({ currectChannelID }) => {
     dispatch(closeModal());
     successToast(t('removeChannelToast'));
     if (currectChannelID === currentChannel.id) {
-      dispatch(changeChannelID(startChannelId));
+      dispatch(changeCurrentChannelID(startChannelId));
     }
   };
   return (
