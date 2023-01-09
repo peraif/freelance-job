@@ -45,17 +45,14 @@ const channelsSlice = createSlice({
     }),
     addChannel: channelsAdapter.addOne,
     removeChannel: (state, { payload }) => {
-      state.activeChannelID = config.INITIAL_CHANNEL_ID;
+      if (payload.id === state.activeChannelID) {
+        state.activeChannelID = config.INITIAL_CHANNEL_ID;
+      }
       return channelsAdapter.removeOne(state, payload.id);
     },
     renameChannel: (state, { payload }) => channelsAdapter.updateOne(state, {
       id: payload.id,
       changes: { name: payload.name },
-    }),
-    updateChannels: (state, { payload }) => ({
-      ...state,
-      activeChannelID: !payload.channels.find((x) => x.id === payload.currentChannelID)
-        ? config.INITIAL_CHANNEL_ID : state.activeChannelID,
     }),
   },
   extraReducers: (builder) => {
